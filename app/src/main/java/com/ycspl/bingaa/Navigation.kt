@@ -24,21 +24,25 @@ fun Navigation() {
                 MainScreen(navController = navController)
         }
 
-        composable(route = Screen.DetailsScreen.route,
-        arguments = listOf(
-            navArgument("name") {
-                 type = NavType.StringType
-                defaultValue = "Vivek"
-                nullable = true
-            },
-            navArgument("age") {
-                type = NavType.StringType
-                defaultValue = "34"
-                nullable = true
-            }
-        )
-        ) { entry->
-            DetailsScreenView(name = entry.arguments?.getString("name"), age = entry.arguments?.getString("age"))
+        composable(
+            route = Screen.DetailsScreen.route + "/{name}/{age}",
+            arguments = listOf(
+                navArgument("name") {
+                    type = NavType.StringType
+                    defaultValue = "Vivek"
+                    nullable = true
+                },
+                navArgument("age") {
+                    type = NavType.StringType
+                    defaultValue = "34"
+                    nullable = true
+                }
+            )
+        ) { entry ->
+            DetailsScreenView(
+                name = entry.arguments?.getString("name"),
+                age = entry.arguments?.getString("age")
+            )
         }
     }
 }
@@ -72,7 +76,7 @@ fun MainScreen(navController: NavController) {
 
             val User = User("Vivek", "Singh")
             navController.currentBackStackEntry?.savedStateHandle?.set("user", User)
-            navController.navigate()
+            navController.navigate(Screen.DetailsScreen.route+"/Phillip/50")
         }) {
             Text(text = "Sumbit")
         }
