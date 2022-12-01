@@ -25,7 +25,7 @@ fun Navigation() {
         }
 
         composable(
-            route = Screen.DetailsScreen.route + "/{name}/{age}",
+            route = Screen.DetailsScreen.route + "?name={name},?age={age}",
             arguments = listOf(
                 navArgument("name") {
                     type = NavType.StringType
@@ -76,7 +76,7 @@ fun MainScreen(navController: NavController) {
 
             val User = User("Vivek", "Singh")
             navController.currentBackStackEntry?.savedStateHandle?.set("user", User)
-            navController.navigate(Screen.DetailsScreen.route+"/Phillip/50")
+            navController.navigate(Screen.DetailsScreen.route+"?name=Phillip,?age=60")
         }) {
             Text(text = "Sumbit")
         }
