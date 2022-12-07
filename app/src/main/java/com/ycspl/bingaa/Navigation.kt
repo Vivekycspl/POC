@@ -76,7 +76,7 @@ fun MainScreen(navController: NavController) {
 
             val User = User("Vivek", "Singh")
             navController.currentBackStackEntry?.savedStateHandle?.set("user", User)
-            navController.navigate(Screen.DetailsScreen.route+"?name=Phillip,?age=60")
+            navController.navigate(Screen.DetailsScreen.route)
         }) {
             Text(text = "Sumbit")
         }
