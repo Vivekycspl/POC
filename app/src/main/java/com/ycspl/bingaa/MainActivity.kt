@@ -23,6 +23,8 @@ import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.ycspl.bingaa.ui.theme.BingAATheme
+import com.ycspl.correctionapp.common.uicomponents.CommonDropDownButton
+import com.ycspl.correctionapp.common.uicomponents.DependentDropDown
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,10 +35,56 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BingAATheme {
-                test()
+                testingDropDowns()
             }
         }
     }
+
+    @Composable
+    fun testingDropDowns() {
+        val typeOfObjection = remember { mutableStateOf<Int>(80) }
+        val documentTypeList = remember { mutableStateListOf(DropDownMenuModel(1, "Others"))}
+
+       Column (modifier = Modifier.padding(20.dp)){
+           Box(modifier = Modifier.fillMaxWidth(.7f)) {
+
+               CommonDropDownButton(
+                   title = "Proof Type",
+                   items = listOf(
+                       DropDownMenuModel(80, "Signed & Filled Objection Form"),
+                       DropDownMenuModel(62, "Id Proof"),
+                       DropDownMenuModel(81, "Address Proof"),
+                       DropDownMenuModel(74, "Registry Papers with Layout Plan"),
+                       DropDownMenuModel(64, "Old Tax Receipt/Bill"),
+                       DropDownMenuModel(82, "Any Other"),
+                   ),
+                   onSelection = {
+                       typeOfObjection.value = it
+                       documentTypeList.clear()
+                       documentTypeList.addAll(Utility.fetchDocumentType(typeOfObjection.value))
+                   }
+               )
+
+           }
+
+           Spacer(modifier = Modifier.height(15.dp))
+
+           //Document Type Layout
+           Box(modifier = Modifier
+               .fillMaxWidth()
+               .height(60.dp)) {
+               DependentDropDown(
+                   title = "Document Type",
+                   items = documentTypeList,
+                   onSelection = {
+
+                   }
+               )
+           }
+       }
+
+    }
+
 
     @Composable
     private fun test() {
