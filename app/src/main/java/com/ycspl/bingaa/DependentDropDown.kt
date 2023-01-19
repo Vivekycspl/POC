@@ -24,9 +24,11 @@ import com.ycspl.bingaa.DropDownMenuModel
 fun DependentDropDown(title: String, items: List<DropDownMenuModel>, onSelection: (Int) -> Unit, selectedText: String = "") {
     val TAG = "CommonDropDownButton"
     var expanded by remember { mutableStateOf(false) }
-    var changed by remember { mutableStateOf(false) }
     var selectedOptionText by remember { mutableStateOf(items[0].name) }
     val currentSelectedValue = mutableStateOf(items[0].name)
+    val index = remember {
+        mutableStateOf<Int>(0)
+    }
 
 
     ExposedDropdownMenuBox(
@@ -46,7 +48,7 @@ fun DependentDropDown(title: String, items: List<DropDownMenuModel>, onSelection
                     .border(width = 1.dp, color = Color.Gray, shape = RoundedCornerShape(5.dp))
                     .height(40.dp)
                     .padding(10.dp),
-                value = if (changed) selectedOptionText else currentSelectedValue.value,
+                value = getValue(index.value, items, selectedOptionText, currentSelectedValue.value),
                 onValueChange = {},
                 textStyle = TextStyle(
                     color = if (isSystemInDarkTheme()) Color(0xFF969EBD) else Color(0xff000000)
@@ -88,10 +90,11 @@ fun DependentDropDown(title: String, items: List<DropDownMenuModel>, onSelection
             items.forEach { selectionOption ->
                 DropdownMenuItem(
                     onClick = {
-                        currentSelectedValue.value = selectedOptionText
+                        currentSelectedValue.value = selectionOption.name
                         selectedOptionText = selectionOption.name
                         expanded = false
-                        changed = true
+                        index.value = items.indexOf(selectionOption)
+                        Log.d(TAG, "DependentDropDown: selected item id: ${selectionOption.id}")
                         onSelection(selectionOption.id)
                     }
                 ) {
@@ -102,5 +105,13 @@ fun DependentDropDown(title: String, items: List<DropDownMenuModel>, onSelection
                 }
             }
         }
+    }
+}
+
+fun getValue(index: Int, items: List<DropDownMenuModel>, selectedOptionText: String, currentlySelected: String): String {
+    if(index<items.size) {
+        return if(items[index].name == currentlySelected) currentlySelected else selectedOptionText
+    } else {
+        return items[0].name
     }
 }

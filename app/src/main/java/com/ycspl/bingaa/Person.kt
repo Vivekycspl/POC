@@ -10,5 +10,5 @@ data class Person(
     var name: String,
     var age: Int,
     var gender: String,
-    var profession: String
+    var profession: String,
 )
