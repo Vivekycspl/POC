@@ -1,5 +1,6 @@
 package com.ycspl.bingaa
 
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -16,6 +17,7 @@ class PersonRepoImpl@Inject constructor(
     }
 
     override suspend fun update(person: String, id: Long) {
+        Log.d("TAG", "update: $person")
         dao.update(person, id)
     }
 
