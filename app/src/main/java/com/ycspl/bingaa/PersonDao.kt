@@ -12,20 +12,18 @@ import kotlinx.coroutines.flow.Flow
 interface PersonDao {
 
     @Query("select * from person")
-    fun getAllPersons() : Flow<List<Person>>
+    fun getAllPersons() : Flow<List<Location>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(person:Person)
-
-    @Query("update person SET profession=:person where id=:id")
-    suspend fun update(person: String, id: Long)
+    suspend fun insert(location:Location): Long
 
     @Update
-    suspend fun updateDetails(person: Person)
+    suspend fun updateDetails(location: Location)
 
     @Delete
-    suspend fun delete(person: Person)
+    suspend fun delete(location: Location)
 
     @Query("select * from person where id=:personID")
-    fun getPersonById(personID: Long): Person
+    fun getPersonById(personID: Long): Location?
+
 }

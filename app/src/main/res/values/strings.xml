@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BingAA</string>
+    <string name="photo_document_dialog_delete_button_suggest">YES</string>
+    <string name="photo_document_dialog_delete_button_no_suggest">NO</string>
+    <string name="photo_document_dialog_delete_floor">Are you sure you want to delete the file <b>\u0022%s\u0022</b> ?</string>
+    <string name="floor_details_button_delete">Delete</string>
 </resources>

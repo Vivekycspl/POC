@@ -11,7 +11,7 @@ class UpdatePersonWorker(context: Context, workerParameters: WorkerParameters) :
     override suspend fun doWork(): Result {
         val personID = inputData.getLong("personId", -1)
         val person = personDatabase.getDao().getPersonById(personID)
-        personDatabase.getDao().update("Doctor", personID)
+        person?.let { personDatabase.getDao().updateDetails(it) }
         return Result.success()
     }
 }

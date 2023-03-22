@@ -21,28 +21,6 @@ class HomeViewModel @Inject constructor(
     private val _elements = mutableStateListOf<String>()
     val list : List<String> = _elements
 
-    fun insertPerson(person: Person) {
-        viewModelScope.launch(Dispatchers.IO) {
-            personsRepo.insert(person)
-        }
-    }
-
-    fun updatePerson(person: String, id: Long) {
-        viewModelScope.launch(Dispatchers.IO) {
-            personsRepo.update(person, id)
-        }
-    }
-
-    fun deletePerson(person: Person) {
-        viewModelScope.launch(Dispatchers.IO) {
-            personsRepo.delete(person)
-        }
-    }
-
-    fun addItem(item: String) {
-        _elements.add(item)
-        Log.d("TAG", "addItem: ${_elements.size}")
-    }
 
 
 }

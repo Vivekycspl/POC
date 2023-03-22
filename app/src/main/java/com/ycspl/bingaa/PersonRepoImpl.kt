@@ -8,20 +8,24 @@ class PersonRepoImpl@Inject constructor(
     private val dao: PersonDao
 ) : PersonRepo {
 
-    override suspend fun insert(person: Person) {
-        dao.insert(person)
+    override suspend fun insert(location: Location): Long {
+        return dao.insert(location)
     }
 
-    override suspend fun delete(person: Person) {
-        dao.delete(person)
+    override suspend fun getLocation(id: Long): Location? {
+        return dao.getPersonById(id)
     }
 
-    override suspend fun update(person: String, id: Long) {
+    override suspend fun delete(location: Location) {
+        dao.delete(location)
+    }
+
+    override suspend fun update(person: Location, id: Long) {
         Log.d("TAG", "update: $person")
-        dao.update(person, id)
+        dao.updateDetails(person)
     }
 
-    override fun getAllPersons(): Flow<List<Person>> {
+    override fun getAllPersons(): Flow<List<Location>> {
         return dao.getAllPersons()
     }
 }

@@ -10,16 +10,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PersonCard(person: Person) {
+fun PersonCard(location: Location) {
     Card(border = BorderStroke(width = 1.dp, color = Color.Blue), modifier = Modifier.fillMaxWidth().padding(15.dp)) {
         Column(modifier = Modifier.padding(10.dp)) {
-            Text(text = "Name :${person.name}")
+            Text(text = "state :${location.state}")
             Spacer(modifier = Modifier.height(10.dp))
-            Text(text = "Age :${person.age}")
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(text = "Gender :${person.gender}")
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(text = "Profession :${person.profession}")
+            Text(text = "city :${location.city}")
             Spacer(modifier = Modifier.height(10.dp))
         }
     }

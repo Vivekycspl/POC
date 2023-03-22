@@ -1,14 +1,15 @@
 package com.ycspl.bingaa
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "person")
-data class Person(
+data class Location(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    var name: String,
-    var age: Int,
-    var gender: String,
-    var profession: String,
+    @ColumnInfo(name = "state")
+    val state: String ? = null,
+    @ColumnInfo(name = "city")
+    val city: String ? = null
 )
